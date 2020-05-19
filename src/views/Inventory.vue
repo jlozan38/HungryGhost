@@ -45,7 +45,7 @@
       </v-dialog>
     </v-row>
     <v-row justify="center" class="mt-8">
-      <h1 class="mb-4">All Products</h1>
+      <h1 class="mb-4">Albums</h1>
       <v-col cols="12">
         <v-data-table
           :headers="productsHeaders"
@@ -54,6 +54,56 @@
         ></v-data-table>
       </v-col>
     </v-row>
+    <v-spacer></v-spacer>
+    <v-spacer></v-spacer>
+
+    <v-row justify="center">
+      <v-btn color="blue darken-1" @click.stop="adding2 = true"
+        >Add New Merchandise</v-btn
+      >
+      <v-dialog v-model="adding2" max-width="480">
+        <v-card>
+          <v-card-title class="headline">Add New Merchandise</v-card-title>
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                v-model="newMerchandise.merchname"
+                label="Merchandise Name"
+              />
+              <v-text-field v-model="newMerchandise.merchtype" label="Merchandise Type" />
+              <v-textarea
+                v-model="newMerchandise.description"
+                label="Description"
+              />
+              <v-text-field v-model="newMerchandise.quantity" label="Qty" />
+              <v-text-field v-model="newMerchandise.price" label="Price" />
+              <v-checkbox
+                v-model="newMerchandise.showCatalog"
+                label="Show in Catalog"
+              />
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn text color="orange darken-1" @click="clear">
+              Cancel
+            </v-btn>
+            <v-btn text color="green darken-1" @click="add2">Add</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
+    <v-row justify="center" class="mt-8">
+      <h1 class="mb-4">Merchandise</h1>
+      <v-col cols="12">
+        <v-data-table
+          :headers="merchandiseHeaders"
+          :items="merchandise"
+          class="elevation-1"
+        ></v-data-table>
+      </v-col>
+    </v-row>
+    
     <v-row>
       <v-col cols="12">
         <h1 class="mb-4">All Orders</h1>
@@ -100,6 +150,7 @@
       </v-col>
     </v-row>
   </v-container>
+  
 </template>
 
 <script>
@@ -110,6 +161,7 @@ export default {
   data() {
     return {
       adding: false,
+      adding2: false,
       newProduct: {
         artistname: "",
         albumname: "",
@@ -118,7 +170,14 @@ export default {
         quantity: 0,
         price: 0,
         showCatalog: false,
-        image: null
+        image: null,
+      },
+      newMerchandise: {
+        merchname: "",
+        merchtype: "",
+        description: "",
+        quantity: 0,
+        price: 0
       },
       productsHeaders: [
         { text: "Artist Name", value: "artistname" },
@@ -126,9 +185,18 @@ export default {
         { text: "Description", value: "description" },
         { text: "Qty", value: "quantity" },
         { text: "Price", value: "price" },
-        { text: "Show", value: "showCatalog" }
+        { text: "Show", value: "showCatalog" },
       ],
-      products: []
+      merchandiseHeaders: [
+        { text: "Merchandise Name", value: "merchname" },
+        { text: "Merchandise Type", value: "merchtype" },
+        { text: "Description", value: "description" },
+        { text: "Qty", value: "quantity" },
+        { text: "Price", value: "price" },
+        { text: "Show", value: "showCatalog" },
+      ],
+      products: [],
+      merch: [],
     };
   },
   created() {
@@ -144,16 +212,24 @@ export default {
         quantity: 0,
         price: 0,
         showCatalog: false,
-        image: null
+        image: null,
+        merchname: "",
+        merchtype: "",
       }),
         (this.adding = false);
+        (this.adding2 = false);
     },
     async add() {
       await db.collection("products").add(this.newProduct);
       this.clear();
     },
+    async add2() {
+      await db.collection("merchandise").add(this.newMerchandise);
+      this.clear();
+    },
     async bind() {
       await this.$bind("products", db.collection("products"));
+      await this.$bind("merchandise", db.collection("merchandise"));
       await this.$bind("orders", db.collection("orders"));
     }
   }

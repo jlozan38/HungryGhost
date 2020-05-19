@@ -44,6 +44,11 @@
         <v-list>
           <v-list-item>
             <v-list-item-title>
+              <v-btn block text to="/Home">Home</v-btn>
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>
               <v-btn block text to="/myorders">My Orders</v-btn>
             </v-list-item-title>
           </v-list-item>
