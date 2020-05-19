@@ -8,15 +8,20 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    user: ""
+    user: "",
+    searchItem: ""
   },
   getters: {
-    getUser: state => state.user
+    getUser: state => state.user,
+    getSearchItem: state => state.searchItem
   },
   mutations: {
-    settingUser: (state, user) => (state.user = user)
+    settingUser: (state, user) => (state.user = user),
+    settingSearchItem: (state, searchItem) => (state.searchItem = searchItem)
   },
   actions: {
+    setSearchItem: ({ commit }, searchItem) =>
+      commit("setSearchItem", searchItem),
     setUser: async ({ commit }, user) => {
       if (user) {
         const userObject = {

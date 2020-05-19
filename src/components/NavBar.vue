@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-app-bar app color="red darken-4" dark>
     <v-toolbar-title class="font-weight-light">
       <v-btn
@@ -13,8 +14,8 @@
     <v-spacer></v-spacer>
     <v-col class="pt-10" cols="20" sm="5" md="5">
       <v-text-field
-        type="text"
         :value="searchItem"
+        type="text"
         class="form-input"
         placeholder="Please Enter Artist or Album Name"
         @change="setSearchItem"
@@ -76,6 +77,7 @@
       </v-menu>
     </div>
   </v-app-bar>
+</div>
 </template>
 
 <script>
@@ -103,6 +105,7 @@ export default {
   methods: {
     setSearchItem(event) {
       this.$store.dispatch("setSearchItem", event.target.value);
+      //console.log(e)
     },
     async logOut() {
       await this.$firebase.auth().signOut();
@@ -114,5 +117,6 @@ export default {
     },
     ...mapActions(["setUser"])
   }
+
 };
 </script>
