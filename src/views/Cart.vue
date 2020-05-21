@@ -47,7 +47,7 @@
             </v-list>
             <v-row>
               <v-spacer />
-              <v-btn color="blue darken-4" text to="/">Continue Shopping</v-btn>
+              <v-btn color="blue darken-4" text to="/home">Continue Shopping</v-btn>
               <v-btn color="yellow darken-4" @click="createOrder"
                 >Checkout</v-btn
               >

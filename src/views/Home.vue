@@ -39,11 +39,6 @@
           <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn icon @click="show = !show">
-              <v-icon>{{
-                show ? "mdi-chevron-up" : "mdi-chevron-down"
-              }}</v-icon>
-            </v-btn>
           </v-card-actions>
 
           <v-expand-transition>
@@ -52,11 +47,8 @@
 
               <v-card-text>
                 <v-row align="right">
-                  <v-subheader>TRACKLIST </v-subheader>
-                  <v-list-item
-                    >01. FEEL SPECIAL 02. RAINBOW 03. GET LOUD 04. TRICK IT 05.
-                    LOVE FOOLISH 06. 21:29 07. BREAKTHROUGH (Korean
-                    Ver.)</v-list-item
+                  <v-subheader> </v-subheader>
+                  <v-list-item></v-list-item
                   >
                 </v-row>
               </v-card-text>
@@ -122,7 +114,7 @@ export default {
         .update({
           items: this.$firebase.firestore.FieldValue.arrayUnion({
             id: product.id,
-            name: product.name,
+            name: product.artistname,
             quantity: 1,
             price: product.price
           })

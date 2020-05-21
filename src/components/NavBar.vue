@@ -5,7 +5,7 @@
       <v-btn
         text
         class="text-none font-weight-light headline"
-        @click="$router.push('/')"
+        @click="$router.push('/Home')"
       >
         <span class="font-weight-regular">HungryGhost Records</span>
       </v-btn>
